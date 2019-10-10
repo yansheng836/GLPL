@@ -19,12 +19,12 @@ public class Main {
      */
     public static void main(String[] args) {
         // 方法1.爬取在线的json、然后进行解析获取数据
-        // String url = "https://leetcode.com/api/problems/all/";
-        // ArrayList<Problem> problemList = SpiderUtil.getProblemListOnline(url);
+        String url = "https://leetcode.com/api/problems/all/";
+        ArrayList<Problem> problemList = SpiderUtil.getProblemListOnline(url);
 
         // 方法2.解析本地json获取数据
-        String filepath = "./leetcode-api.json";
-        ArrayList<Problem> problemList = SpiderUtil.getProblemListFromLocal(filepath);
+        // String filepath = "./leetcode-api.json";
+        // ArrayList<Problem> problemList = SpiderUtil.getProblemListFromLocal(filepath);
 
         // 将数据写到文件中
         String pathname = "./LeetCode问题集目录.md";

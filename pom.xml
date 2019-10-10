@@ -5,7 +5,7 @@
 
 	<groupId>xyz.yansheng</groupId>
 	<artifactId>GLPL</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<description>为LeetCode的问题集生成目录导航列表。</description>
 
@@ -24,22 +24,12 @@
 			<version>1.2.58</version>
 		</dependency>
 
-
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.6</version>
 		</dependency>
-
-
-		<!-- https://mvnrepository.com/artifact/net.sourceforge.htmlunit/htmlunit -->
-		<dependency>
-			<groupId>net.sourceforge.htmlunit</groupId>
-			<artifactId>htmlunit</artifactId>
-			<version>2.33</version>
-		</dependency>
-
 
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
@@ -49,19 +39,11 @@
 			<scope>provided</scope>
 		</dependency>
 
-
 		<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
 		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
 			<version>1.12.1</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-io -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>1.3.2</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
@@ -85,7 +67,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>xyz.yansheng.main.App</mainClass>
+							<mainClass>xyz.yansheng.main.Main</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
@@ -113,6 +95,7 @@
 					<check />
 				</configuration>
 			</plugin>
+			
 		</plugins>
 	</build>
 
