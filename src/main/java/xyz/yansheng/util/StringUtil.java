@@ -16,7 +16,7 @@ public class StringUtil {
      * @return 格式化后的id
      */
     public static String formatId(String id) {
-        DecimalFormat format = new DecimalFormat("0001");
+        DecimalFormat format = new DecimalFormat("0000");
         // 要先将字符串转为对应的数值的类，不然会抛出IllegalArgumentException
         String formatString = format.format(new Integer(id));
         return formatString;

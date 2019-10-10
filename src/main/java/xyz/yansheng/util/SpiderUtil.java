@@ -1,17 +1,21 @@
 package xyz.yansheng.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.jsoup.Connection;
+import org.apache.commons.io.FileUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 
 import xyz.yansheng.bean.Problem;
 
 /**
- * 爬虫工具类，问题主页网址：https://leetcode-cn.com/problemset/all/
+ * 爬虫工具类，爬取json数据：https://leetcode.com/api/problems/all/
  * 
  * @author yansheng
  * @date 2019/10/09
@@ -19,135 +23,85 @@ import xyz.yansheng.bean.Problem;
 public class SpiderUtil {
 
     /**
-     * 获取该用户的非空的分类列表
+     * 解析本地json数据
      * 
-     * @param username
-     *            用户名
-     * @return 分类专栏列表
+     * @param filepath
+     *            文件路径
+     * @return 问题列表
      */
-    public static ArrayList<Problem> getProblemList(String url) {
+    public static ArrayList<Problem> getProblemList(String filepath) {
 
-        ArrayList<Problem> problemList = new ArrayList<Problem>(50);
+        ArrayList<Problem> problemList = new ArrayList<Problem>(1000);
 
-     // 获取文档对象
-        Document doc = null;
+        // 1.读取本地json文件，转化为字符串
+        String json = null;
         try {
-            Connection con = Jsoup.connect(url).userAgent(
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36")
-                .timeout(30000); // 设置连接超时时间
-
-            Connection.Response response = con.execute();
-
-            if (response.statusCode() == 200) {
-                doc = con.get();
-            } else {
-//                System.out.println(response.statusCode());
-                return null;
-            }
+            json = FileUtils.readFileToString(new File(filepath), "gbk");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
-        System.out.println(doc.text());
-        // try {
-        // doc = Jsoup.connect(url).get();
-        // System.out.println(doc.text());
-        // } catch (IOException e) {
-        // e.printStackTrace();
-        // }
 
-        // <tr>
-        // <td value="ac" label="[object Object]"><span class="text-success fa fa-check"></span>
-        // </td>
-        // <td label="[object Object]">1</td>
-        // <td value="Two Sum" label="[object Object]">
-        // <div><a href="/problems/two-sum">两数之和</a> <span class="fa fa-info-circle title-tooltip" data-toggle="tooltip"
-        // data-placement="top" data-original-title="Two Sum" aria-hidden="true" style="cursor: pointer;"></span> </div>
-        // </td>
-        // <td value="363" label="[object Object]"><a href="/problems/two-sum/solution" class="solution-link">363</a>
-        // </td>
-        // <td value="46.723562712212555" label="[object Object]">46.7%</td>
-        // <td value="[object Object]" label="[object Object]"><span class="label label-success round">简单</span>
-        // </td>
-        // <td label="[object Object]"></td>
-        // </tr>
+        // 2.解析json，最外层JSONObject{}
+        JSONObject dataJson = JSON.parseObject(json);
+        // System.out.println(dataJson);
 
-        Element tbodyElement = doc.selectFirst("tbody.reactable-data");
-        System.out.println(tbodyElement.text());
-        
-//        Element ulElement = asideElement.selectFirst("ul");
-//        Elements liElements = ulElement.select("li a");
-//        for (Element liElement : liElements) {
-//            // 标题
-//            Element spanElement1 = liElement.selectFirst("span.title.oneline");
-//
-//            // 博客数量，如果这个不为空，表示该分类有文章，添加该分类到列表
-//            Element spanElement2 = liElement.selectFirst("span.count.float-right");
-//            if (spanElement2 != null) {
-//                String href = liElement.attr("href");
-//                String title = spanElement1.text();
-//
-//                Category category = new Category();
-//                category.setUrl(href);
-//                category.setTitle(title);
-//                problemList.add(category);
-//            }
-//        }
+        // 3.解析内容的数组JSONArray[{},{}]
+        JSONArray statStatusPairs = dataJson.getJSONArray("stat_status_pairs");
+        // System.out.println(statStatusPairs);
+
+        // define the prefix of the url
+        String prefix = "https://leetcode.com/problems/";
+
+        // 4.遍历每个对象
+        int size = statStatusPairs.size();
+        for (int i = 0; i < size; i++) {
+            JSONObject problemJson = statStatusPairs.getJSONObject(i);
+            // System.out.println(jsonObject);
+            JSONObject stat = problemJson.getJSONObject("stat");
+            // System.out.println(stat);
+
+            // 获取具体的属性
+            String id = (String)stat.get("question_id").toString();
+            String title = (String)stat.get("question__title");
+            String titleEn = (String)stat.get("question__title_slug");
+            String problemUrl = prefix + titleEn + "/description/";
+            String solutionUrl = prefix + titleEn + "/solution/";
+
+            JSONObject difficulty = problemJson.getJSONObject("difficulty");
+            String range = (String)difficulty.get("level").toString();
+
+            Problem problem = new Problem(id, title, titleEn, range, problemUrl, solutionUrl);
+            // System.out.println(problem.toString());
+            // System.out.println(problem.formatToString());
+            problemList.add(problem);
+        }
 
         return problemList;
     }
 
     /**
-     * 获取该分类的所有博客列表
+     * 解析在线json数据（简单版，内容详见getProblemList）
      * 
-     * @param category
-     *            分类实体类（blogs为空）
-     * @return 分类实体类（blogs不为空）
+     * @param url
+     *            json数据网址
+     * @return 问题列表
      */
-    // public static Category getCategoryBlogs(Category category) {
-    //
-    // ArrayList<Blog> blogs = new ArrayList<Blog>(20);
-    // String url = category.getUrl();
-    //
-    // // 获取文档对象
-    // Document doc = null;
-    // try {
-    // doc = Jsoup.connect(url).get();
-    // } catch (IOException e) {
-    // e.printStackTrace();
-    // }
-    //
-    // // 先判断该分类是否有多页
-    // // 标签信息，详见：某个分类专栏的文章列表的ul标签 - 多页.txt
-    // Element pageBoxElement = doc.selectFirst("div.pagination-box");
-    //
-    // // 非空表示该分类博客数量多，有多页
-    // if (pageBoxElement != null) {
-    // // 循环每页，直到遇到该页的博客列表空就停止
-    // for (int i = 1;; i++) {
-    // String pageUrl = url + "/" + i;
-    // // 获取该页博客列表，如果没有博客，返回null
-    // ArrayList<Blog> blogs1 = getPageBlogs(pageUrl);
-    //
-    // // 如果不为空，添加到列表；为空时，直接跳出循环。
-    // if (blogs1 != null) {
-    //// System.out.println(pageUrl);
-    // blogs.addAll(blogs1);
-    // // 如果该页博客数量少于20，说明没有下一页了。
-    // if (blogs1.size() < 20) {
-    // break;
-    // }
-    // } else {
-    // break;
-    // }
-    // }
-    // } else {
-    // // 单页
-    // ArrayList<Blog> blogs1 = getPageBlogs(url);
-    // blogs.addAll(blogs1);
-    // }
-    //
-    // category.setBlogs(blogs);
-    // return category;
-    // }
+    public static ArrayList<Problem> getProblemList0(String url) {
+
+        ArrayList<Problem> problemList = new ArrayList<Problem>(1000);
+
+        Document doc = null;
+        try {
+            doc = Jsoup.connect(url).get();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(doc.text());
+        
+        // ……，下面内容同下
+
+        return problemList;
+    }
+
 }

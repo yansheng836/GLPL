@@ -49,7 +49,8 @@ public @Data class Problem {
      */
     public String formatToString() {
 
-        return "- [ ] " + StringUtil.formatId(id) + "." + title + "(" + titleEn + ")：[题目描述](" + problemUrl + ")，[解答](" + solutionUrl + ")";
+//        return "- [ ] " + StringUtil.formatId(id) + "." + title + "(" + titleEn + ")：[题目描述](" + problemUrl + ")，[解答](" + solutionUrl + ")";
+        return "- [ ] " + StringUtil.formatId(id) + "." + title + "：[Description](" + problemUrl + ")，[Solution](" + solutionUrl + ")";
     }
 
 }
