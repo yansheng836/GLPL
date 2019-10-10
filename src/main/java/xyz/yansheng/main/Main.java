@@ -26,9 +26,16 @@ public class Main {
         // String filepath = "./leetcode-api.json";
         // ArrayList<Problem> problemList = SpiderUtil.getProblemListFromLocal(filepath);
 
-        // 将数据写到文件中
+        // 写到文件中
         String pathname = "./LeetCode问题集目录.md";
-        FileUtil.writeList(problemList, pathname);
+        String pathname1 = "./LeetCode问题集目录-简单.md";
+        String pathname2 = "./LeetCode问题集目录-中等.md";
+        String pathname3 = "./LeetCode问题集目录-困难.md";
+
+        String[] strings = {pathname, pathname1, pathname2, pathname3};
+        for (String string : strings) {
+            FileUtil.writeList(problemList, string);
+        }
     }
 
 }

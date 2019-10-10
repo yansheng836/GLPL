@@ -5,7 +5,7 @@
 
 	<groupId>xyz.yansheng</groupId>
 	<artifactId>GLPL</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<description>为LeetCode的问题集生成目录导航列表。</description>
 

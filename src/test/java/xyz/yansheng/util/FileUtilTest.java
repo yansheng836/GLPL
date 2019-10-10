@@ -26,9 +26,16 @@ public class FileUtilTest {
         assertNotNull(problemList);
         assertFalse(problemList.isEmpty());
 
-        String pathname = "./LeetCode问题集目录.md";
-
         // 写到文件中
-        FileUtil.writeList(problemList, pathname);
+        String pathname = "./test/LeetCode问题集目录.md";
+        String pathname1 = "./test/LeetCode问题集目录-简单.md";
+        String pathname2 = "./test/LeetCode问题集目录-中等.md";
+        String pathname3 = "./test/LeetCode问题集目录-困难.md";
+
+        String[] strings = {pathname, pathname1, pathname2, pathname3};
+        for (String string : strings) {
+            FileUtil.writeList(problemList, string);
+        }
     }
+
 }

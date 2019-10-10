@@ -21,14 +21,14 @@
 
 找到了对应的json文件，网址为：<https://leetcode.com/api/problems/all/>，解析该json数据可得到需要的数据，唯一可惜的就是好像只有英文版、没有中文版。
 
-已下载：[leetcode-api.json](https://github.com/yansheng836/GLPL/blob/master/leetcode-api.json)
+已将该json文件下载到本仓库，并进行了格式化：[leetcode-api.json](https://github.com/yansheng836/GLPL/blob/master/leetcode-api.json)
 
 ## 生成文件
 
 - [LeetCode问题集目录.md](<https://github.com/yansheng836/GLPL/blob/master/LeetCode问题集目录.md>)
-- [problemset-简单.md](https://github.com/yansheng836/GLPL/blob/master/problemset-简单.md)
-- [problemset-中等.md](https://github.com/yansheng836/GLPL/blob/master/problemset-中等.md)
-- [problemset-困难.md](https://github.com/yansheng836/GLPL/blob/master/problemset-困难.md)
+- [LeetCode问题集目录-简单.md](<https://github.com/yansheng836/GLPL/blob/master/LeetCode问题集目录-简单.md>)
+- [LeetCode问题集目录-中等.md](<https://github.com/yansheng836/GLPL/blob/master/LeetCode问题集目录-中等.md>)
+- [LeetCode问题集目录-困难.md](<https://github.com/yansheng836/GLPL/blob/master/LeetCode问题集目录-困难.md>)
 
 ## 使用
 
@@ -40,6 +40,12 @@
 
 ```bash
 java -jar GLPL-*-SNAPSHOT.jar
+
+# 下面为输出内容
+写数据到：./LeetCode问题集目录.md 成功！共有 1220 条数据。
+写数据到：./LeetCode问题集目录-简单.md 成功！共有 352 条数据。
+写数据到：./LeetCode问题集目录-中等.md 成功！共有 616 条数据。
+写数据到：./LeetCode问题集目录-困难.md 成功！共有 252 条数据。
 ```
 
 可在当前目录生成 **LeetCode的问题集生成目录导航列表** 文件，当然你也可以添加一些说明。

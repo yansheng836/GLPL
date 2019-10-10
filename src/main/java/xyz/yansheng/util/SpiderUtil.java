@@ -16,8 +16,9 @@ import com.alibaba.fastjson.JSONObject;
 import xyz.yansheng.bean.Problem;
 
 /**
- * 爬虫工具类，1.一开始计划直接爬取网址数据，但是没想到数据js动态生成的，不会动态爬取。
- * 2后面找到了对应的json数据，于是改为爬取json数据：https://leetcode.com/api/problems/all/
+ * 爬虫工具类.
+ * 1.一开始计划直接爬取网址数据，但是没想到数据js动态生成的，不会动态爬取。 
+ * 2.后面找到了对应的json数据，于是改为爬取json数据：https://leetcode.com/api/problems/all/
  * 
  * @author yansheng
  * @date 2019/10/09
