@@ -1,4 +1,6 @@
- package xyz.yansheng.util;
+package xyz.yansheng.util;
+
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -13,10 +15,13 @@ public class StringUtilTest {
      */
     @Test
     public void testFormatId() {
-        
+
         int count = 1100;
         for (int i = 1; i < count; i++) {
-            System.out.println(StringUtil.formatId(String.valueOf(i)));
+            String id = StringUtil.formatId(String.valueOf(i));
+            assertTrue(id.length() == 4);
+            
+            System.out.print(id +",");
         }
     }
 
