@@ -81,11 +81,9 @@ public class SpiderUtil {
 
         // 2.解析json，最外层JSONObject{}
         JSONObject dataJson = JSON.parseObject(jsonString);
-        // System.out.println(dataJson);
 
         // 3.解析内容的数组JSONArray[{},{}]
         JSONArray statStatusPairs = dataJson.getJSONArray("stat_status_pairs");
-        // System.out.println(statStatusPairs);
 
         // define the prefix of the url
         String prefix = "https://leetcode.com/problems/";
@@ -96,9 +94,7 @@ public class SpiderUtil {
         int size = statStatusPairs.size();
         for (int i = 0; i < size; i++) {
             JSONObject problemJson = statStatusPairs.getJSONObject(i);
-            // System.out.println(jsonObject);
             JSONObject stat = problemJson.getJSONObject("stat");
-            // System.out.println(stat);
 
             // 获取具体的属性
             String id = (String)stat.get("question_id").toString();
@@ -111,7 +107,6 @@ public class SpiderUtil {
             String range = (String)difficulty.get("level").toString();
 
             Problem problem = new Problem(id, title, titleEn, range, problemUrl, solutionUrl);
-            // System.out.println(problem.formatToString());
             problemList.add(problem);
         }
 
