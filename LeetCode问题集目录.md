@@ -1,4 +1,4 @@
-## /LeetCode问题集目录
+## LeetCode问题集目录
 
 - [ ] 0001.Two Sum：[Description](https://leetcode.com/problems/two-sum/description/)，[Solution](https://leetcode.com/problems/two-sum/solution/)
 - [ ] 0002.Add Two Numbers：[Description](https://leetcode.com/problems/add-two-numbers/description/)，[Solution](https://leetcode.com/problems/add-two-numbers/solution/)

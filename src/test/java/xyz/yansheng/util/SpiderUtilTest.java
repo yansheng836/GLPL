@@ -1,56 +1,50 @@
 package xyz.yansheng.util;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 
-import org.apache.commons.io.FileUtils;
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import xyz.yansheng.bean.Problem;
 
 /**
+ * 测试SpiderUtil。
+ * 
  * @author yansheng
  * @date 2019/10/09
  */
 public class SpiderUtilTest {
 
     @Test
-    public void testGetProblemList() {
-        // String url = "https://leetcode-cn.com/problemset/all/";
-        String filepath = "leetcode-api.json";
-        ArrayList<Problem> problemList = SpiderUtil.getProblemList(filepath);
-        // 逆序
-        Collections.reverse(problemList);
+    public void testGetProblemListOnline() {
 
-        // 将字符串写到文件中
-        String pathname = "./LeetCode问题集目录.md";
-        StringBuffer sBuffer = new StringBuffer(16000);
-        sBuffer.append("## " + pathname.substring(2, pathname.length() - 3) + "\n\n");
-        System.out.println(sBuffer);
-        // f.write('## %s\n\n' % filename[:-3])
+        String url = "https://leetcode.com/api/problems/all/";
+        ArrayList<Problem> problemList = SpiderUtil.getProblemListOnline(url);
+        // 判断非空
+        assertNotNull(problemList);
+        assertFalse(problemList.isEmpty());
+
+        // 遍历
         for (Problem problem : problemList) {
-            // System.out.println(problem.formatToString());
-            sBuffer.append(problem.formatToString() + "\n");
-        }
-
-        String encoding = "UTF-8";
-        String data = new String(sBuffer);
-        File file = new File(pathname);
-        try {
-            FileUtils.writeStringToFile(file, data, encoding);
-            System.out.println("写数据到：" + pathname + "成功！");
-        } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(problem.formatToString());
         }
     }
-    
+
     @Test
-    public void testGetProblemList0() {
-        
-        String url = "https://leetcode.com/api/problems/all/";
-        SpiderUtil.getProblemList0(url);
+    public void testGetProblemListFromLocal() {
+        String filepath = "./leetcode-api.json";
+        ArrayList<Problem> problemList = SpiderUtil.getProblemListFromLocal(filepath);
+
+        // 判断非空
+        assertNotNull(problemList);
+        assertFalse(problemList.isEmpty());
+
+        // 遍历
+        for (Problem problem : problemList) {
+            System.out.println(problem.formatToString());
+        }
     }
 
 }

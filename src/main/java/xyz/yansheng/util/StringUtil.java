@@ -3,6 +3,8 @@ package xyz.yansheng.util;
 import java.text.DecimalFormat;
 
 /**
+ * 字符串工具类。
+ * 
  * @author yansheng
  * @date 2019/10/09
  */

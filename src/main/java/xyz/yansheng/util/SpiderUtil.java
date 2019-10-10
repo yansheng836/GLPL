@@ -3,6 +3,7 @@ package xyz.yansheng.util;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.apache.commons.io.FileUtils;
 import org.jsoup.Jsoup;
@@ -15,12 +16,36 @@ import com.alibaba.fastjson.JSONObject;
 import xyz.yansheng.bean.Problem;
 
 /**
- * 爬虫工具类，爬取json数据：https://leetcode.com/api/problems/all/
+ * 爬虫工具类，1.一开始计划直接爬取网址数据，但是没想到数据js动态生成的，不会动态爬取。
+ * 2后面找到了对应的json数据，于是改为爬取json数据：https://leetcode.com/api/problems/all/
  * 
  * @author yansheng
  * @date 2019/10/09
  */
 public class SpiderUtil {
+
+    /**
+     * 解析在线json数据:https://leetcode.com/api/problems/all/
+     * 
+     * @param url
+     *            json数据网址
+     * @return 问题列表
+     */
+    public static ArrayList<Problem> getProblemListOnline(String url) {
+
+        // 1.用Jsoup获得在线的json数据，转化为字符串
+        Document doc = null;
+        try {
+            doc = Jsoup.connect(url).get();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // 获取json
+        String jsonString = doc.text();
+
+        // 解析json，并返回
+        return parseJsonStringToList(jsonString);
+    }
 
     /**
      * 解析本地json数据
@@ -29,20 +54,33 @@ public class SpiderUtil {
      *            文件路径
      * @return 问题列表
      */
-    public static ArrayList<Problem> getProblemList(String filepath) {
-
-        ArrayList<Problem> problemList = new ArrayList<Problem>(1000);
+    public static ArrayList<Problem> getProblemListFromLocal(String filepath) {
 
         // 1.读取本地json文件，转化为字符串
-        String json = null;
+        String jsonString = null;
         try {
-            json = FileUtils.readFileToString(new File(filepath), "gbk");
+            jsonString = FileUtils.readFileToString(new File(filepath), "gbk");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        // 解析json，并返回
+        return parseJsonStringToList(jsonString);
+    }
+
+    /**
+     * 解析“问题”json字符串，返回问题列表
+     * 
+     * @param jsonString
+     *            json字符串
+     * @return 问题列表
+     */
+    public static ArrayList<Problem> parseJsonStringToList(String jsonString) {
+
+        ArrayList<Problem> problemList = new ArrayList<Problem>(1350);
+
         // 2.解析json，最外层JSONObject{}
-        JSONObject dataJson = JSON.parseObject(json);
+        JSONObject dataJson = JSON.parseObject(jsonString);
         // System.out.println(dataJson);
 
         // 3.解析内容的数组JSONArray[{},{}]
@@ -51,8 +89,10 @@ public class SpiderUtil {
 
         // define the prefix of the url
         String prefix = "https://leetcode.com/problems/";
+        // 中文版的：
+        String prefixCn = "https://leetcode-cn.com/problems/";
 
-        // 4.遍历每个对象
+        // 4.遍历每个对象，取出需要的值，构造Problem，然后添加到list中。
         int size = statStatusPairs.size();
         for (int i = 0; i < size; i++) {
             JSONObject problemJson = statStatusPairs.getJSONObject(i);
@@ -71,35 +111,12 @@ public class SpiderUtil {
             String range = (String)difficulty.get("level").toString();
 
             Problem problem = new Problem(id, title, titleEn, range, problemUrl, solutionUrl);
-            // System.out.println(problem.toString());
             // System.out.println(problem.formatToString());
             problemList.add(problem);
         }
 
-        return problemList;
-    }
-
-    /**
-     * 解析在线json数据（简单版，内容详见getProblemList）
-     * 
-     * @param url
-     *            json数据网址
-     * @return 问题列表
-     */
-    public static ArrayList<Problem> getProblemList0(String url) {
-
-        ArrayList<Problem> problemList = new ArrayList<Problem>(1000);
-
-        Document doc = null;
-        try {
-            doc = Jsoup.connect(url).get();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println(doc.text());
-        
-        // ……，下面内容同下
+        // 逆序，因为在json中id小的在后面，这里进行逆序操作，将其放到前面。
+        Collections.reverse(problemList);
 
         return problemList;
     }

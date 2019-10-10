@@ -14,8 +14,9 @@ public class StringUtilTest {
     @Test
     public void testFormatId() {
         
-        String id = "1";
-        System.out.println(StringUtil.formatId(id));
+        for (int i = 1; i < 101; i++) {
+            System.out.println(StringUtil.formatId(String.valueOf(i)));
+        }
     }
 
 }
