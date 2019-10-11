@@ -1,5 +1,12 @@
 # Generate LeetCode  Problemset List(GLPL)
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2241a7c031d140759707a980eaba868f)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yansheng836/GLPL&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.org/yansheng836/GLPL.svg?branch=master)](https://travis-ci.org/yansheng836/GLPL)
+[![codecov](https://codecov.io/gh/yansheng836/GLPL/branch/master/graph/badge.svg)](https://codecov.io/gh/yansheng836/GLPL)
+[![BCH compliance](https://bettercodehub.com/edge/badge/yansheng836/GLPL?branch=master)](https://bettercodehub.com/)
+[![GitHub LICENSE ](https://img.shields.io/github/license/yansheng836/GLPL)](https://github.com/yansheng836/GLPL/blob/master/LICENSE.txt)
+[![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/yansheng836/GLPL?include_prereleases)](https://github.com/yansheng836/GLPL/releases)
+
 ## 说明
 
 为 [LeetCode的问题集](https://leetcode-cn.com/problemset/all/) 生成目录导航列表。
