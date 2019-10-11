@@ -1,8 +1,8 @@
 language: java
 sudo: false
-jdk:
-  - openjdk8
--source 8
+#jdk:
+#  - openjdk8
+#-source 8
 
 # codecov
 script: "mvn cobertura:cobertura"
