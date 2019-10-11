@@ -1,0 +1,68 @@
+java8的lambda通不过：
+lambda expressions are not supported in -source 1.5
+  (use -source 8 or higher to enable lambda expressions)
+
+
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:compile (default-compile) on project GLPL: Compilation failure
+[ERROR] /home/travis/build/yansheng836/GLPL/src/main/java/xyz/yansheng/util/SpiderUtil.java:[118,51] lambda expressions are not supported in -source 1.5
+[ERROR]   (use -source 8 or higher to enable lambda expressions)
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+The command "eval mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V " failed. Retrying, 2 of 3
+
+
+
+
+Apache Maven 3.6.0 (97c98ec64a1fdfee7767ce5ffb20918da4f719f3; 2018-10-24T18:41:47Z)
+Maven home: /usr/local/maven-3.6.0
+Java version: 1.8.0_222, vendor: Private Build, runtime: /usr/lib/jvm/java-8-openjdk-amd64/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: "linux", version: "4.15.0-1037-gcp", arch: "amd64", family: "unix"
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------------< xyz.yansheng:GLPL >--------------------------
+[INFO] Building GLPL 0.0.3-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ GLPL ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/travis/build/yansheng836/GLPL/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ GLPL ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 5 source files to /home/travis/build/yansheng836/GLPL/target/classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /home/travis/build/yansheng836/GLPL/src/main/java/xyz/yansheng/util/SpiderUtil.java:[118,51] lambda expressions are not supported in -source 1.5
+  (use -source 8 or higher to enable lambda expressions)
+[INFO] 1 error
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.646 s
+[INFO] Finished at: 2019-10-11T07:05:21Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:compile (default-compile) on project GLPL: Compilation failure
+[ERROR] /home/travis/build/yansheng836/GLPL/src/main/java/xyz/yansheng/util/SpiderUtil.java:[118,51] lambda expressions are not supported in -source 1.5
+[ERROR]   (use -source 8 or higher to enable lambda expressions)
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+The command "eval mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V " failed. Retrying, 3 of 3.
+
+
+
+The command "eval mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V " failed 3 times.
+The command "mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V" failed and exited with 1 during .
