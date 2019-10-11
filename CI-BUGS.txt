@@ -1,4 +1,4 @@
-java8的lambda通不过：
+java8鐨刲ambda閫氫笉杩囷細
 lambda expressions are not supported in -source 1.5
   (use -source 8 or higher to enable lambda expressions)
 
