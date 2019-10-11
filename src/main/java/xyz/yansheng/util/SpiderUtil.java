@@ -98,7 +98,7 @@ public class SpiderUtil {
             JSONObject stat = problemJson.getJSONObject("stat");
 
             // 获取具体的属性
-            String id = (String)stat.get("question_id").toString();
+            String id = (String)stat.get("frontend_question_id").toString();
             String title = (String)stat.get("question__title");
             String titleEn = (String)stat.get("question__title_slug");
             String problemUrl = prefix + titleEn + "/description/";
@@ -113,6 +113,9 @@ public class SpiderUtil {
 
         // 逆序，因为在json中id小的在后面，这里进行逆序操作，将其放到前面。
         Collections.reverse(problemList);
+        
+        // 即使逆序后，会把小id放到前面，但是还有有点乱，再次进行排序
+        problemList.sort((Problem o1, Problem o2) -> new Integer(o1.getId()).compareTo(new Integer(o2.getId())));
 
         return problemList;
     }

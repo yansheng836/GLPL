@@ -52,7 +52,7 @@ public class FileUtil {
         // 先用StringBuffer拼接字符串，然后转为String写到文件中
         StringBuffer sBuffer = new StringBuffer(17000);
         // 1.文章标题：参考文件名"./LeetCode问题集目录.md"
-        sBuffer.append("## " + pathname.substring(2, pathname.length() - 3) + "\n\n");
+        sBuffer.append("## " + pathname.substring(2, pathname.length() - 3) + "(共" + problems.size() + "题)\n\n");
         // 2.文章的主要内容，问题列表
         for (Problem problem : problems) {
             sBuffer.append(problem.formatToString() + "\n");
@@ -63,7 +63,7 @@ public class FileUtil {
         File file = new File(pathname);
         try {
             FileUtils.writeStringToFile(file, data, encoding);
-            System.out.println("写数据到：" + pathname + " 成功！共有 "+problems.size()+" 条数据。");
+            System.out.println("写数据到：" + pathname + " 成功！共有 " + problems.size() + " 条数据。");
         } catch (IOException e) {
             e.printStackTrace();
         }

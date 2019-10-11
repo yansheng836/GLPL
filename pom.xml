@@ -5,7 +5,7 @@
 
 	<groupId>xyz.yansheng</groupId>
 	<artifactId>GLPL</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<description>为LeetCode的问题集生成目录导航列表。</description>
 
@@ -14,6 +14,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- 防止测试时中文乱码 -->
+		<argLine>-Dfile.encoding=UTF-8</argLine>
 	</properties>
 
 	<dependencies>

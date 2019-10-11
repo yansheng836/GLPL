@@ -9,7 +9,7 @@ import org.junit.Test;
 public class ProblemTest {
 
     @Test
-    public void test() {
+    public void testProblem() {
         // - [ ] 两数之和(Two Sum) ：[题目描述](https://leetcode-cn.com/problems/two-sum/)，
         // [解答](https://leetcode-cn.com/problems/two-sum/solution/)
         String id = "1";

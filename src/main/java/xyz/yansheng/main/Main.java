@@ -18,6 +18,8 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
+        System.out.println("正在爬取数据，请稍候……");
+        
         // 方法1.爬取在线的json、然后进行解析获取数据
         String url = "https://leetcode.com/api/problems/all/";
         ArrayList<Problem> problemList = SpiderUtil.getProblemListOnline(url);
@@ -33,6 +35,7 @@ public class Main {
         String pathname3 = "./LeetCode问题集目录-困难.md";
 
         String[] strings = {pathname, pathname1, pathname2, pathname3};
+        
         for (String string : strings) {
             FileUtil.writeList(problemList, string);
         }
